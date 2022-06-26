@@ -48,4 +48,16 @@ public abstract class LoadBalancer {
 		this.activeProviders.add(p);
 	}
 
+    public void heartBeatCheck() {
+		for (Provider provider : this.registeredProviders) {
+			if (this.activeProviders.contains(provider)) {
+				String response = provider.get();
+				if (response == null || response.equals("MaxRequestReached")) {
+					excludeProvider(provider);
+					provider.setHealth(false);
+				}
+			}
+		}
+	}
+
 }

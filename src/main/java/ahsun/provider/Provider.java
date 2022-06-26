@@ -10,12 +10,14 @@ public class Provider {
     private int numRequests;
     private boolean active;
     private LoadBalancer loadBalancer;
-    public final static int maxRequests = 10;
+    private boolean health;
+    private final static int maxRequests = 10;
 
     public Provider(LoadBalancer loadBalancer){
-        this.uuid = UUID.randomUUID();
-        this.loadBalancer = loadBalancer;
-        setActive(true);        
+       this.uuid = UUID.randomUUID();
+       this.loadBalancer = loadBalancer;
+       this.active = true;
+       this.health = true;
     }
 
     public String get(){
@@ -27,7 +29,7 @@ public class Provider {
             }
             return this.uuid.toString();
         }else if (numRequests == Provider.maxRequests) {
-            return "MaxRequestsReached";
+            return "MaxRequestReached";
         }else{
             return null;
         }        
@@ -64,5 +66,13 @@ public class Provider {
     public void register() {
 		this.loadBalancer.registerProvider(this);
 	}
+
+    public void setHealth(boolean health){
+        this.health = health;
+    }
+
+    public boolean getHealth(){
+        return this.health;
+    }
     
 }
