@@ -44,3 +44,20 @@ If a node has been previously excluded from the balancing it should be re-includ
 ## Step 8 – Cluster Capacity Limit
 
 Assuming that each provider can handle a maximum number of Y parallel requests, the Balancer should not accept any further request when it has (Y*aliveproviders) incoming requests running simultaneously
+
+
+# How to start the Load Balancer
+### Pre-requisite
+You need **[Maven](https://maven.apache.org/download.cgi)** and **[Java 8](https://www.oracle.com/ie/java/technologies/javase/javase8-archive-downloads.html)** to run the load balancer. 
+### How to compile
+You can run the following command to compile.
+
+    mvn clean compile
+
+<img width="419" alt="image" src="https://user-images.githubusercontent.com/26001761/175838784-9bc5cacd-ccb0-4175-b1eb-8ba3467b8143.png">
+
+### How to test
+You can run the following command to run test/simulation of the load balancer
+
+    mvn test
+<img width="633" alt="image" src="https://user-images.githubusercontent.com/26001761/175838916-b0f41eec-9909-42db-a23f-e250a2c4055f.png">
