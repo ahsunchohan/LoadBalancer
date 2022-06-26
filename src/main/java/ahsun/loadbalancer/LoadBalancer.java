@@ -54,7 +54,24 @@ public abstract class LoadBalancer {
 				String response = provider.get();
 				if (response == null || response.equals("MaxRequestReached")) {
 					excludeProvider(provider);
-					provider.setHealth(false);
+					provider.setHealth(0);
+				}
+			}
+			if (!this.activeProviders.contains(provider)) {
+				String response = provider.get();
+				if (response != null && !response.equals("MaxRequestReached")) {
+					if (provider.getHealth() == 0){
+						provider.setHealth(1);
+						break;
+					}
+
+					if (provider.getHealth() == 1) {
+						provider.setHealth(2);
+						includeProvider(provider);
+					}
+				}
+				else if (provider.getHealth() > 0){
+					provider.setHealth(0);
 				}
 			}
 		}

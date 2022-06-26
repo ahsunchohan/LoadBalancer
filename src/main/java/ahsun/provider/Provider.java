@@ -10,14 +10,14 @@ public class Provider {
     private int numRequests;
     private boolean active;
     private LoadBalancer loadBalancer;
-    private boolean health;
+    private int health;
     private final static int maxRequests = 10;
 
     public Provider(LoadBalancer loadBalancer){
        this.uuid = UUID.randomUUID();
        this.loadBalancer = loadBalancer;
        this.active = true;
-       this.health = true;
+       this.health = 2;
     }
 
     public String get(){
@@ -67,11 +67,11 @@ public class Provider {
 		this.loadBalancer.registerProvider(this);
 	}
 
-    public void setHealth(boolean health){
+    public void setHealth(int health){
         this.health = health;
     }
 
-    public boolean getHealth(){
+    public int getHealth(){
         return this.health;
     }
     
