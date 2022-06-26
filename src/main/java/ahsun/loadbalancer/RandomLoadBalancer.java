@@ -13,7 +13,7 @@ public class RandomLoadBalancer extends LoadBalancer {
 
     @Override
     public String get(){
-        List<Provider> providerList = getProviders();
+        List<Provider> providerList = getActiveProviders();
         int randNum = new Random().nextInt(providerList.size());
         Provider randProvider = providerList.get(randNum);
         return randProvider.get();
